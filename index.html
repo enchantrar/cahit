@@ -1,0 +1,410 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Cahit Sıtkı Fidancı</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=IM+Fell+English:ital@0;1&family=IM+Fell+English+SC&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --ink: #0d0c0b;
+      --paper: #f5f0e8;
+      --gold: #b8965a;
+      --ash: #3a3530;
+      --smoke: #7a7060;
+      --faint: #1a1814;
+    }
+
+    html, body {
+      height: 100%;
+      background: var(--ink);
+      color: var(--paper);
+      font-family: 'IM Fell English', Georgia, serif;
+      overflow-x: hidden;
+    }
+
+    a { color: inherit; text-decoration: none; }
+
+    nav {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 100;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 2rem 3rem;
+      mix-blend-mode: difference;
+    }
+
+    .nav-name {
+      font-family: 'IM Fell English SC', serif;
+      font-size: 13px;
+      letter-spacing: 0.15em;
+      color: var(--paper);
+      opacity: 0.5;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 2.5rem;
+      list-style: none;
+    }
+
+    .nav-links a {
+      font-size: 11px;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--paper);
+      opacity: 0.35;
+      transition: opacity 0.3s;
+    }
+
+    .nav-links a:hover { opacity: 0.8; }
+
+    .hero {
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      padding: 8rem 3rem 4rem;
+      position: relative;
+      max-width: 900px;
+    }
+
+    .hero-eyebrow {
+      font-size: 10px;
+      letter-spacing: 0.3em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 3rem;
+      opacity: 0.7;
+    }
+
+    .hero-poem {
+      font-size: clamp(18px, 2.5vw, 26px);
+      line-height: 2;
+      color: var(--paper);
+      opacity: 0.9;
+      max-width: 640px;
+    }
+
+    .hero-poem p {
+      margin-bottom: 1.8rem;
+    }
+
+    .hero-poem em {
+      color: var(--gold);
+      font-style: italic;
+      opacity: 0.8;
+    }
+
+    .hero-meta {
+      margin-top: 4rem;
+      display: flex;
+      align-items: center;
+      gap: 1.5rem;
+    }
+
+    .hero-meta-line {
+      width: 40px;
+      height: 0.5px;
+      background: var(--gold);
+      opacity: 0.4;
+    }
+
+    .hero-meta-text {
+      font-size: 11px;
+      letter-spacing: 0.2em;
+      color: var(--smoke);
+      text-transform: uppercase;
+    }
+
+    .section {
+      padding: 6rem 3rem;
+      border-top: 0.5px solid rgba(255,255,255,0.06);
+    }
+
+    .section-label {
+      font-size: 10px;
+      letter-spacing: 0.3em;
+      text-transform: uppercase;
+      color: var(--gold);
+      opacity: 0.5;
+      margin-bottom: 4rem;
+    }
+
+    .archive-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 3rem;
+      max-width: 1100px;
+    }
+
+    .archive-item {
+      border-top: 0.5px solid rgba(255,255,255,0.1);
+      padding-top: 1.5rem;
+      cursor: pointer;
+      transition: opacity 0.3s;
+    }
+
+    .archive-item:hover { opacity: 0.6; }
+
+    .archive-date {
+      font-size: 10px;
+      letter-spacing: 0.2em;
+      color: var(--smoke);
+      text-transform: uppercase;
+      margin-bottom: 1rem;
+    }
+
+    .archive-title {
+      font-size: 20px;
+      line-height: 1.5;
+      color: var(--paper);
+      margin-bottom: 0.8rem;
+    }
+
+    .archive-excerpt {
+      font-size: 14px;
+      line-height: 1.8;
+      color: var(--smoke);
+      font-style: italic;
+    }
+
+    .travel-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 2px;
+      max-width: 1100px;
+    }
+
+    .travel-item {
+      position: relative;
+      aspect-ratio: 4/5;
+      overflow: hidden;
+      background: var(--faint);
+      cursor: pointer;
+    }
+
+    .travel-item img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      opacity: 0.6;
+      transition: opacity 0.5s, transform 0.6s;
+      filter: grayscale(30%) sepia(20%);
+    }
+
+    .travel-item:hover img {
+      opacity: 0.4;
+      transform: scale(1.03);
+    }
+
+    .travel-overlay {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      padding: 2rem 1.5rem;
+      background: linear-gradient(transparent, rgba(13,12,11,0.9));
+    }
+
+    .travel-place {
+      font-size: 10px;
+      letter-spacing: 0.25em;
+      text-transform: uppercase;
+      color: var(--gold);
+      opacity: 0.7;
+      margin-bottom: 0.5rem;
+    }
+
+    .travel-line {
+      font-size: 15px;
+      line-height: 1.6;
+      color: var(--paper);
+      font-style: italic;
+      opacity: 0.85;
+    }
+
+    .travel-placeholder {
+      width: 100%;
+      height: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--ash);
+      font-size: 11px;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+    }
+
+    footer {
+      padding: 4rem 3rem;
+      border-top: 0.5px solid rgba(255,255,255,0.06);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .footer-name {
+      font-family: 'IM Fell English SC', serif;
+      font-size: 12px;
+      letter-spacing: 0.2em;
+      color: var(--smoke);
+    }
+
+    .footer-year {
+      font-size: 11px;
+      color: var(--ash);
+      letter-spacing: 0.1em;
+    }
+
+    .grain {
+      position: fixed;
+      top: 0; left: 0; right: 0; bottom: 0;
+      pointer-events: none;
+      z-index: 1000;
+      opacity: 0.025;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
+    }
+
+    .fade-up {
+      opacity: 0;
+      transform: translateY(20px);
+      transition: opacity 0.9s ease, transform 0.9s ease;
+    }
+
+    .fade-up.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    @media (max-width: 640px) {
+      nav { padding: 1.5rem; }
+      .nav-name { display: none; }
+      .hero { padding: 6rem 1.5rem 3rem; }
+      .section { padding: 4rem 1.5rem; }
+      footer { padding: 3rem 1.5rem; flex-direction: column; gap: 1rem; }
+    }
+  </style>
+</head>
+<body>
+
+<div class="grain"></div>
+
+<nav>
+  <span class="nav-name">Cahit Sıtkı Fidancı</span>
+  <ul class="nav-links">
+    <li><a href="#arsiv">Arşiv</a></li>
+    <li><a href="#seyahat">Seyahat</a></li>
+  </ul>
+</nav>
+
+<main>
+
+  <section class="hero">
+    <div class="hero-eyebrow fade-up">Haziran 2025</div>
+    <div class="hero-poem fade-up">
+      <p>Şehir arabası gelir sabahın o belirsiz saatinde —<br>
+      ne gece ne gündüz, ikisi arasında asılı,<br>
+      bir <em>berzah</em>.</p>
+
+      <p>Fransızlar buna <em>entre chien et loup</em> der.<br>
+      Köpekle kurt arasında.<br>
+      Ben de öyleyim bu sabah.</p>
+
+      <p>Karşımda bir adam uyuyor.<br>
+      Başı cama yaslanmış.<br>
+      Rüya görüyor mu — yoksa sadece gözleri mi kapalı.<br>
+      Spinoza bunu bilirdi.</p>
+
+      <p>İnecek durak geldi.<br>
+      Kalktım.<br>
+      Adam hâlâ uyuyor.</p>
+
+      <p>Fark eder mi?</p>
+    </div>
+    <div class="hero-meta fade-up">
+      <div class="hero-meta-line"></div>
+      <span class="hero-meta-text">Şehir Arabası</span>
+    </div>
+  </section>
+
+  <section class="section" id="arsiv">
+    <div class="section-label">Arşiv</div>
+    <div class="archive-grid">
+      <div class="archive-item fade-up">
+        <div class="archive-date">Haziran 2025</div>
+        <div class="archive-title">Şehir Arabası</div>
+        <div class="archive-excerpt">Ne gece ne gündüz, ikisi arasında asılı bir hal...</div>
+      </div>
+      <div class="archive-item fade-up" style="opacity:0.3; pointer-events:none;">
+        <div class="archive-date">Temmuz 2025</div>
+        <div class="archive-title" style="color: var(--ash);">—</div>
+        <div class="archive-excerpt">henüz yazılmadı</div>
+      </div>
+      <div class="archive-item fade-up" style="opacity:0.3; pointer-events:none;">
+        <div class="archive-date">Ağustos 2025</div>
+        <div class="archive-title" style="color: var(--ash);">—</div>
+        <div class="archive-excerpt">henüz yazılmadı</div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="seyahat">
+    <div class="section-label">Seyahat</div>
+    <div class="travel-grid">
+      <div class="travel-item fade-up">
+        <div class="travel-placeholder">fotoğraf eklenecek</div>
+        <div class="travel-overlay">
+          <div class="travel-place">İstanbul</div>
+          <div class="travel-line">Boğaz sisi insanı düşünmekten kurtarır bazen.</div>
+        </div>
+      </div>
+      <div class="travel-item fade-up">
+        <div class="travel-placeholder">fotoğraf eklenecek</div>
+        <div class="travel-overlay">
+          <div class="travel-place">—</div>
+          <div class="travel-line">henüz gidilmedi</div>
+        </div>
+      </div>
+      <div class="travel-item fade-up">
+        <div class="travel-placeholder">fotoğraf eklenecek</div>
+        <div class="travel-overlay">
+          <div class="travel-place">—</div>
+          <div class="travel-line">henüz gidilmedi</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  <span class="footer-name">Cahit Sıtkı Fidancı</span>
+  <span class="footer-year">2025</span>
+</footer>
+
+<script>
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach((entry, i) => {
+      if (entry.isIntersecting) {
+        setTimeout(() => {
+          entry.target.classList.add('visible');
+        }, i * 120);
+        observer.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.1 });
+
+  document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
+</script>
+
+</body>
+</html>
