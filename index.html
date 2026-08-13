@@ -136,13 +136,28 @@
     }
 
     .archive-item {
+      width: 100%;
+      border: 0;
+      background: transparent;
       border-top: 0.5px solid rgba(255,255,255,0.1);
       padding-top: 1.5rem;
+      text-align: left;
       cursor: pointer;
-      transition: opacity 0.3s;
+      transition: opacity 0.3s, transform 0.2s ease;
+      color: inherit;
+      font: inherit;
     }
 
-    .archive-item:hover { opacity: 0.6; }
+    .archive-item:hover,
+    .archive-item:focus-visible {
+      opacity: 0.75;
+      transform: translateY(-1px);
+      outline: none;
+    }
+
+    .archive-item.is-selected {
+      opacity: 1;
+    }
 
     .archive-date {
       font-size: 10px;
@@ -288,8 +303,8 @@
 <main>
 
   <section class="hero">
-    <div class="hero-eyebrow fade-up">Temmuz 2025</div>
-    <div class="hero-poem fade-up">
+    <div class="hero-eyebrow fade-up" id="hero-month">Temmuz 2025</div>
+    <div class="hero-poem fade-up" id="hero-poem">
       <p>Kahve tortusuna baktı uzun uzun. Fincanı çevirdi, tekrar çevirdi. Ben sigara yaktım, içmiyorum aslında, o gün yaktım.</p>
 
       <p>Sokak ıslaktı. Sabah yağmur yağmış, şimdi güneş var ama zemin hâlâ tutuyor. Bu şehrin özelliği bu. Bir şey geçer, izi kalır, zemin bırakmaz.</p>
@@ -310,7 +325,7 @@
     </div>
     <div class="hero-meta fade-up">
       <div class="hero-meta-line"></div>
-      <span class="hero-meta-text">Fal</span>
+      <span class="hero-meta-text" id="hero-meta">Fal</span>
     </div>
   </section>
 
@@ -318,17 +333,23 @@
     <div class="section-label">Arşiv</div>
     <div class="archive-grid">
 
-      <div class="archive-item fade-up">
+      <button class="archive-item fade-up" type="button" data-month="Haziran 2025" aria-current="false">
         <div class="archive-date">Haziran 2025</div>
         <div class="archive-title">Şehir Arabası</div>
         <div class="archive-excerpt">Ne gece ne gündüz, ikisi arasında asılı bir hal, bir berzah.</div>
-      </div>
+      </button>
 
-      <div class="archive-item fade-up" style="opacity:0.2; pointer-events:none;">
+      <button class="archive-item fade-up is-selected" type="button" data-month="Temmuz 2025" aria-current="true">
+        <div class="archive-date">Temmuz 2025</div>
+        <div class="archive-title">Kapı</div>
+        <div class="archive-excerpt">Kahve soğumuştu; yine de içtim. Kapı açıktı. Asıl mesele içeri girmek değil, içinde ne olduğunu bilmekti.</div>
+      </button>
+
+      <button class="archive-item fade-up" type="button" data-month="Ağustos 2025" aria-current="false">
         <div class="archive-date">Ağustos 2025</div>
-        <div class="archive-title" style="color: var(--ash);">.</div>
-        <div class="archive-excerpt">henüz yazılmadı</div>
-      </div>
+        <div class="archive-title">Yazın Son Gölgesi</div>
+        <div class="archive-excerpt">Güneşin en kalın olduğu günlerde bile bir şey eksilmek üzere durur; o eksilme, en çok içte anlaşılır.</div>
+      </button>
 
     </div>
   </section>
@@ -337,24 +358,24 @@
     <div class="section-label">Seyahat</div>
     <div class="travel-grid">
       <div class="travel-item fade-up">
-        <div class="travel-placeholder">fotoğraf eklenecek</div>
+        <img src="image/DSCF1085.JPG" alt="İstanbul Boğaz manzarası">
         <div class="travel-overlay">
           <div class="travel-place">İstanbul</div>
           <div class="travel-line">Boğaz sisi insanı düşünmekten kurtarır bazen.</div>
         </div>
       </div>
       <div class="travel-item fade-up">
-        <div class="travel-placeholder">fotoğraf eklenecek</div>
+        <img src="image/DSCF1057.JPG" alt="İkinci gezi fotoğrafı">
         <div class="travel-overlay">
-          <div class="travel-place"></div>
-          <div class="travel-line">henüz gidilmedi</div>
+          <div class="travel-place">Kayıtlı</div>
+          <div class="travel-line">yolun sonunda bir fotoğraf kalır.</div>
         </div>
       </div>
       <div class="travel-item fade-up">
-        <div class="travel-placeholder">fotoğraf eklenecek</div>
+        <img src="image/DSCF1048.JPG" alt="Üçüncü gezi fotoğrafı">
         <div class="travel-overlay">
-          <div class="travel-place"></div>
-          <div class="travel-line">henüz gidilmedi</div>
+          <div class="travel-place">Kayıtlı</div>
+          <div class="travel-line">gün doğumuyla birlikte bir şey daha görünür.</div>
         </div>
       </div>
     </div>
@@ -376,6 +397,71 @@
       }
     });
   }, { threshold: 0.1 });
+
+  const monthEntries = {
+    'Haziran 2025': {
+      month: 'Haziran 2025',
+      meta: 'Haziran',
+      poem: [
+        'Şehrin arabalı sokaklarında gece ile gündüz birbiriyle konuşur gibi durur. Her köşede bir ikilem, her köşede bir duruş, her duruşta bir gecikmiş cümle.',
+        'Kimi zaman bir kütüphane gibi olur şehir; kimi zaman bir tren istasyonu; kimi zaman da bir insanın içindeki boş oda. İkinin arasında kalmış her şeyin adı “berzah”tır.',
+        'Ben o sabah sokakları izliyordum. Kapılar kapalı, camlar aydınlık, ama herkesin içi aynı ışığı taşıyordu. Araba geçti, gölgesi kaldı, sonra tüm caddede yalnızca bir suskunluk kaldı.',
+        'Yolculuk, bazen bakmanın şeklidir. Bir şeyi görmeden önce, onun varlığını hissedersin. Sonra aniden her şey açıklıkla gelir; şehir, ev, gecenin içinde saklanan ben.',
+        'Geçen her araç beni hatırlatır. Biri gelir, biri gider; bir sinek gibi, bir şarkı gibi. Ben de kezâ bir yolculuk yapar gibi dura dura, yaşarım.',
+        'Haziran, bir başka tür sessizliği getirir. Haziran, yoğunluğun içinde bir nefes gibi durur. O nefesi tutmak için yalnızca kalmak gerekir.'
+      ]
+    },
+    'Temmuz 2025': {
+      month: 'Temmuz 2025',
+      meta: 'Temmuz',
+      poem: [
+        'Kahve tortusuna baktı uzun uzun. Fincanı çevirdi, tekrar çevirdi. Ben sigara yaktım, içmiyorum aslında, o gün yaktım.',
+        'Sokak ıslaktı. Sabah yağmur yağmış, şimdi güneş var ama zemin hâlâ tutuyor. Bu şehrin özelliği bu. Bir şey geçer, izi kalır, zemin bırakmaz.',
+        'Yol var dedi, uzun bir yol, sonunda bir kapı.',
+        'Kapı açık mı dedim.',
+        'Bilmiyorum dedi, ona kadar git.',
+        'Fincanı geri koydum. Dışarıya baktım. Sokakta bir adam yürüyordu, ellerinde paket, başı önde. Nereye gittiğini biliyor gibiydi. Ben her sabah çıkarım kapıdan, nereye gittiğimi bilirim. Ama neden gittiğimi, bunu sormuyorum artık.',
+        'Kahve soğumuştu. İçtim yine de.',
+        'Kapı meselesine gelince, bence açıktır. Her kapı açıktır. Asıl mesele içinde ne olduğu.',
+        'Güldü. Neden güldüğünü sormadım. Bazı şeyleri sormamak lazım.'
+      ]
+    },
+    'Ağustos 2025': {
+      month: 'Ağustos 2025',
+      meta: 'Ağustos',
+      poem: [
+        'Güneş bir kez daha başıma dikildi. Çünkü yaz en son geldiğinde aslında hep odanın içinde başlar; pencereden sızan ışık, masadaki boş fincan, dışarıdaki sokak rüzgârı.',
+        'Yoldan geçenler hızla geçer. O kadar hızlı ki, bir akşamüstü üzerinde konuşulan her cümle bile yavaş kalır. Ağustos, bu yüzden her şeyi biraz daha yavaş yaptırır. Saatleri değil, hissi.',
+        'Biri “güzel bir şey istiyorsan, onu sıradan yerlerde arama” dedi. Ben şehirde bir ağaç gölgesine oturdum, gökte hafif bir bulutun durduğu yere baktım. Ağaç, içimi bile hafifletti.',
+        'Yazın sonu diye bir şey yokmuş gibi davranıyoruz. Oysa her yırtılan gökyüzü, her kuruyan çiçek, her uzayan akşam bir sonun habercisi. Ama bunu da bilerek söylüyoruz. Çünkü güzellik, en çok yaklaşan kaybın yanında anlaşılır.',
+        'Bir masanın üzerinde duran kahve, günün en doğru şeyiydi; sıcak, uzun, bembeyaz. Kısa bir cümle gibi. Sonra sokak ılık ve sessiz bir eşya gibi kaldı.',
+        'İçimden bir şey geçti. Duydum. Bunu daha önce de yaşamıştım. Her ağustos, aslında bir kapıyı aralamak için gelir. Kapı açıktır. Sadece içeri girmek için biraz vakit gerekir.'
+      ]
+    }
+  };
+
+  const heroMonth = document.getElementById('hero-month');
+  const heroPoem = document.getElementById('hero-poem');
+  const heroMeta = document.getElementById('hero-meta');
+
+  const setHeroEntry = (monthKey) => {
+    const entry = monthEntries[monthKey];
+    if (!entry) return;
+
+    heroMonth.textContent = entry.month;
+    heroMeta.textContent = entry.meta;
+    heroPoem.innerHTML = entry.poem.map((paragraph) => `<p>${paragraph}</p>`).join('');
+
+    document.querySelectorAll('.archive-item').forEach((item) => {
+      const selected = item.dataset.month === monthKey;
+      item.classList.toggle('is-selected', selected);
+      item.setAttribute('aria-current', selected ? 'true' : 'false');
+    });
+  };
+
+  document.querySelectorAll('.archive-item').forEach((item) => {
+    item.addEventListener('click', () => setHeroEntry(item.dataset.month));
+  });
 
   document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
 </script>
