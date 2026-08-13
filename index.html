@@ -365,16 +365,16 @@
         </div>
       </div>
       <div class="travel-item fade-up">
-        <img src="image/DSCF1057.JPG" alt="İkinci gezi fotoğrafı">
+        <img src="image/DSCF1057.JPG" alt="Yolun sonunda bir fotoğraf kalır">
         <div class="travel-overlay">
-          <div class="travel-place">Kayıtlı</div>
+          <div class="travel-place">Yol Sonu</div>
           <div class="travel-line">yolun sonunda bir fotoğraf kalır.</div>
         </div>
       </div>
       <div class="travel-item fade-up">
-        <img src="image/DSCF1048.JPG" alt="Üçüncü gezi fotoğrafı">
+        <img src="image/DSCF1048.JPG" alt="Gün doğumuyla birlikte bir şey daha görünür">
         <div class="travel-overlay">
-          <div class="travel-place">Kayıtlı</div>
+          <div class="travel-place">Gün Doğumu</div>
           <div class="travel-line">gün doğumuyla birlikte bir şey daha görünür.</div>
         </div>
       </div>
@@ -385,7 +385,7 @@
 
 <footer>
   <span class="footer-name">Cahit Sıtkı Fidancı</span>
-  <span class="footer-year">2025</span>
+  <span class="footer-year">2026</span>
 </footer>
 
 <script>
@@ -457,6 +457,11 @@
       item.classList.toggle('is-selected', selected);
       item.setAttribute('aria-current', selected ? 'true' : 'false');
     });
+
+    const heroSection = document.querySelector('.hero');
+    if (heroSection) {
+      heroSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
   };
 
   document.querySelectorAll('.archive-item').forEach((item) => {
