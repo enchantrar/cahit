@@ -333,11 +333,11 @@
     <div class="section-label">Arşiv</div>
     <div class="archive-grid">
 
-      <button class="archive-item fade-up" type="button" data-month="Haziran 2025" aria-current="false">
+      <div class="archive-item fade-up">
         <div class="archive-date">Haziran 2025</div>
         <div class="archive-title">Şehir Arabası</div>
         <div class="archive-excerpt">Ne gece ne gündüz, ikisi arasında asılı bir hal, bir berzah.</div>
-      </button>
+      </div>
 
       <button class="archive-item fade-up is-selected" type="button" data-month="Temmuz 2025" aria-current="true">
         <div class="archive-date">Temmuz 2025</div>
@@ -347,8 +347,8 @@
 
       <button class="archive-item fade-up" type="button" data-month="Ağustos 2025" aria-current="false">
         <div class="archive-date">Ağustos 2025</div>
-        <div class="archive-title">Yazın Son Gölgesi</div>
-        <div class="archive-excerpt">Güneşin en kalın olduğu günlerde bile bir şey eksilmek üzere durur; o eksilme, en çok içte anlaşılır.</div>
+        <div class="archive-title">Karpuz Kesen Kadın</div>
+        <div class="archive-excerpt">Ağustosun sıcağı yalnızca gündüz değil, gecede de kalıyor artık. Yaz, bir şey söyler, sonra susar.</div>
       </button>
 
     </div>
@@ -399,21 +399,9 @@
   }, { threshold: 0.1 });
 
   const monthEntries = {
-    'Haziran 2025': {
-      month: 'Haziran 2025',
-      meta: 'Haziran',
-      poem: [
-        'Şehrin arabalı sokaklarında gece ile gündüz birbiriyle konuşur gibi durur. Her köşede bir ikilem, her köşede bir duruş, her duruşta bir gecikmiş cümle.',
-        'Kimi zaman bir kütüphane gibi olur şehir; kimi zaman bir tren istasyonu; kimi zaman da bir insanın içindeki boş oda. İkinin arasında kalmış her şeyin adı “berzah”tır.',
-        'Ben o sabah sokakları izliyordum. Kapılar kapalı, camlar aydınlık, ama herkesin içi aynı ışığı taşıyordu. Araba geçti, gölgesi kaldı, sonra tüm caddede yalnızca bir suskunluk kaldı.',
-        'Yolculuk, bazen bakmanın şeklidir. Bir şeyi görmeden önce, onun varlığını hissedersin. Sonra aniden her şey açıklıkla gelir; şehir, ev, gecenin içinde saklanan ben.',
-        'Geçen her araç beni hatırlatır. Biri gelir, biri gider; bir sinek gibi, bir şarkı gibi. Ben de kezâ bir yolculuk yapar gibi dura dura, yaşarım.',
-        'Haziran, bir başka tür sessizliği getirir. Haziran, yoğunluğun içinde bir nefes gibi durur. O nefesi tutmak için yalnızca kalmak gerekir.'
-      ]
-    },
     'Temmuz 2025': {
       month: 'Temmuz 2025',
-      meta: 'Temmuz',
+      meta: 'Fal',
       poem: [
         'Kahve tortusuna baktı uzun uzun. Fincanı çevirdi, tekrar çevirdi. Ben sigara yaktım, içmiyorum aslında, o gün yaktım.',
         'Sokak ıslaktı. Sabah yağmur yağmış, şimdi güneş var ama zemin hâlâ tutuyor. Bu şehrin özelliği bu. Bir şey geçer, izi kalır, zemin bırakmaz.',
@@ -428,14 +416,17 @@
     },
     'Ağustos 2025': {
       month: 'Ağustos 2025',
-      meta: 'Ağustos',
+      meta: 'Karpuz',
       poem: [
-        'Güneş bir kez daha başıma dikildi. Çünkü yaz en son geldiğinde aslında hep odanın içinde başlar; pencereden sızan ışık, masadaki boş fincan, dışarıdaki sokak rüzgârı.',
-        'Yoldan geçenler hızla geçer. O kadar hızlı ki, bir akşamüstü üzerinde konuşulan her cümle bile yavaş kalır. Ağustos, bu yüzden her şeyi biraz daha yavaş yaptırır. Saatleri değil, hissi.',
-        'Biri “güzel bir şey istiyorsan, onu sıradan yerlerde arama” dedi. Ben şehirde bir ağaç gölgesine oturdum, gökte hafif bir bulutun durduğu yere baktım. Ağaç, içimi bile hafifletti.',
-        'Yazın sonu diye bir şey yokmuş gibi davranıyoruz. Oysa her yırtılan gökyüzü, her kuruyan çiçek, her uzayan akşam bir sonun habercisi. Ama bunu da bilerek söylüyoruz. Çünkü güzellik, en çok yaklaşan kaybın yanında anlaşılır.',
-        'Bir masanın üzerinde duran kahve, günün en doğru şeyiydi; sıcak, uzun, bembeyaz. Kısa bir cümle gibi. Sonra sokak ılık ve sessiz bir eşya gibi kaldı.',
-        'İçimden bir şey geçti. Duydum. Bunu daha önce de yaşamıştım. Her ağustos, aslında bir kapıyı aralamak için gelir. Kapı açıktır. Sadece içeri girmek için biraz vakit gerekir.'
+        'Sabah erken kalktım. Öyle bir sıcak vardı ki, uyumak bile ağırlaştı.',
+        'Perdeyi çektim. Işık girdi ama içeri değil, önce eşyaya değdi. Masa, fincan, kitap — her biri sırayla aydınlandı.',
+        'Yazın böyle bir hâli var. Her şey belirir; hiçbir şey açıklanmaz.',
+        'Sokağa çıktım. Ağustosun sıcağı yalnızca gündüz değil, gecede de kalıyor artık. Zemin sıcak, duvar sıcak, insan sıcak. Bir tek gölge serin.',
+        'Bir kadın kapının önünde oturuyordu. Karpuz kesiyordu. Bana bakmadı, ben ona bakmadım. Ama oradan geçtiğimde dünya bir an durdu gibi geldi.',
+        'Öğleden sonra kahve içmedim. İçmemek de bir şeydir. Su içtim, uzun uzun.',
+        'Akşam olduğunda hava değişti. Rüzgâr geldi, sonra gitti, sonra tekrar geldi. Yaz biraz da bu; bir şey söyler, sonra susar, sonra tekrar söyler.',
+        'Bir arkadaşım aradı. Nasılsın dedi. İyi dedim. Ne yapıyorsun dedi. Hiç dedim. Güldü. Ben de güldüm.',
+        'Ağustos, bazen hiç yapmamak için bir bahanedir. Bazen de bir şey yapmadan geçen zamanın, aslında en dolu zaman olduğunu gösterir.'
       ]
     }
   };
